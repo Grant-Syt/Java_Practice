@@ -4,29 +4,31 @@ public class RodCutting {
 	
 	public static void main(String[] args) {
 		
-		long startTime, endTime;
+		double startTime, endTime;
 		int intResult;
 		int[] arrayResult;
+
+		int[] arr = {0,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,1};
 		
 		System.out.println("Naive solution:");
 		startTime = System.currentTimeMillis();
-		intResult = cut_rod_naive(new int[]{0,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,1}, 32);
+		intResult = cut_rod_naive(arr, 32);
 		endTime = System.currentTimeMillis();
-		System.out.println("Total execution time: " + (endTime - startTime));
+		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
 		System.out.println("Result: " + intResult);
 		
 		System.out.println("\nBook DP solution:");
 		startTime = System.currentTimeMillis();
-		arrayResult = cut_rod_dp_bup_book(new int[]{0,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,1});
+		arrayResult = cut_rod_dp_bup_book(arr);
 		endTime = System.currentTimeMillis();
-		System.out.println("Total execution time: " + (endTime - startTime));
+		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
 		System.out.println("Result: " + arrayResult[32]);
 		
 		System.out.println("\nRevised DP solution:");
 		startTime = System.currentTimeMillis();
-		arrayResult = cut_rod_dp_bup(new int[]{1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,1});
+		arrayResult = cut_rod_dp_bup(arr);
 		endTime = System.currentTimeMillis();
-		System.out.println("Total execution time: " + (endTime - startTime));
+		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
 		System.out.println("Result: " + arrayResult[31]);
 	}
 	
@@ -41,6 +43,13 @@ public class RodCutting {
 //		for (int i=0; i<n; i++) {
 //			System.out.println("p[" + i + "] = " + p[i]);
 //		}
+
+		// remove 0 from index 0
+		int[] p2 = new int[n-1];
+		for (int i=1; i<n; i++) {
+			p2[i-1] = p[i];
+		}
+		n = n-1;
 		
 		//algorithm
 		int[] r = new int[n];
@@ -48,9 +57,9 @@ public class RodCutting {
 			int q = Integer.MIN_VALUE;
 			for (int i=1; i<=j; i++) {
 				if (i==j) {
-					q = Math.max(q, p[i-1]);
+					q = Math.max(q, p2[i-1]);
 				} else {
-					q = Math.max(q, p[i-1] + r[j-i-1]);
+					q = Math.max(q, p2[i-1] + r[j-i-1]);
 				}
 			}
 			r[j-1] = q;
