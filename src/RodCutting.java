@@ -9,10 +9,11 @@ public class RodCutting {
 		int[] arrayResult;
 
 		int[] arr = {0,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,5,8,9,10,17,17,20,24,30,1,1};
+		int n = arr.length;
 		
 		System.out.println("Naive solution:");
 		startTime = System.currentTimeMillis();
-		intResult = cut_rod_naive(arr, 32);
+		intResult = cut_rod_naive(arr, n - 1);
 		endTime = System.currentTimeMillis();
 		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
 		System.out.println("Result: " + intResult);
@@ -22,14 +23,14 @@ public class RodCutting {
 		arrayResult = cut_rod_dp_bup_book(arr);
 		endTime = System.currentTimeMillis();
 		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
-		System.out.println("Result: " + arrayResult[32]);
+		System.out.println("Result: " + arrayResult[n-1]);
 		
 		System.out.println("\nRevised DP solution:");
 		startTime = System.currentTimeMillis();
 		arrayResult = cut_rod_dp_bup(arr);
 		endTime = System.currentTimeMillis();
 		System.out.println("Total execution time: " + ((endTime - startTime) / 1000));
-		System.out.println("Result: " + arrayResult[31]);
+		System.out.println("Result: " + arrayResult[n - 2]);
 	}
 	
 	public static int[] cut_rod_dp_bup(int[] p) {
