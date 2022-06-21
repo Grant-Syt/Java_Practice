@@ -3,11 +3,13 @@ import java.util.List;
 
 public class Array_Operations {
 
+    static Print p = new Print();
+
     public static void main(String[] args) {
         int[] arr = { 2, 3, 6, 1, 5, 4 };
         List<int[]> res = allSubarray(arr);
         printListOfArrays(res);
-        System.out.println("");
+        p.print("");
         allSubsequence(arr);
     }
 
@@ -23,7 +25,7 @@ public class Array_Operations {
                     // System.out.print(arr[i + k] + ",");
                     subarr[k] = arr[i + k];
                 }
-                // System.out.println("]");
+                // p.print("]");
                 res.add(subarr);
             }
         }
@@ -37,7 +39,7 @@ public class Array_Operations {
     private static void subseqHelper(int[] arr, int i, List<Integer> subarr) {
         // base case, past last element
         if (i == arr.length) {
-            System.out.println(subarr);
+            p.print(subarr);
         } else {
             // ignore ith
             subseqHelper(arr, i + 1, subarr);
@@ -58,7 +60,7 @@ public class Array_Operations {
                 slist.add(Integer.toString(aNumber));
             }
             // slist.remove(slist.size() - 1);
-            System.out.println(slist.toString());
+            p.print(slist.toString());
         }
     }
 
